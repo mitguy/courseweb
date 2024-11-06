@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id         Int      @id @unique @default(autoincrement())
+  username   String   @unique
+  createdAt  DateTime @default(now())
+  bio        String?
+  profilepic Bytes?
+  follows    Int?     @default(0)
+  followers  Int?     @default(0)
+}
+
+model follows {
+  id         Int      @id @unique @default(autoincrement())
+  from       Int
+  to         Int
+  followedAt DateTime @default(now())
+}
+
+model auth {
+  id       Int    @id @unique
+  username String @unique
+  password String
+  email    String
+}
+
+model streams {
+  id       Int     @id @unique
+  username String  @unique
+  live     Boolean @default(false)
+  title    String
+  viewers  Int[]
+}
+
+model passwords {
+  id     Int     @id @unique
+  active Boolean @default(true)
+  hash   String
+}
