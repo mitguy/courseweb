@@ -14,15 +14,25 @@ export default {
       "red": "ff0000",
     },
     extend: {
+      textColor: {
+        "red": "#ff0000",
+      },
       width: {
         "128": "32rem",
         "256": "64rem",
+        "wp": "1248px",
+      },
+      height: {
+        "hp": "702px",
       },
       colors: {
         background: "#000000",
         foreground: "#ffffff",
         primary: "#ffbf00",
       },
+      borderWidth: {
+        "1": "1px",
+      }
     },
   },
   plugins: [],

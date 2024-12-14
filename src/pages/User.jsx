@@ -1,54 +1,50 @@
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { GET, loadProfilePic } from "../components/Util";
+import NotFound from "../pages/NotFound";
 import Content from "../components/Content";
 import Title from "../components/Title";
 import ProfilePic from "../components/ProfilePic";
 import FollowerCount from "../components/FollowerCount";
 import CreatedAge from "../components/CreatedAge";
 import Bio from "../components/Bio";
+import FollowButton from "../components/FollowButton";
 
 export default function User() {
   const { username } = useParams();
 
-  console.log(username);
-
   const [cookie] = useCookies(['glitch']);
   const [data, setData] = useState([]);
-  const [imageSrc, setImageSrc] = useState("");
+  const [imgSrc, setImgSrc] = useState(null);
+  const [followed, setFollowed] = useState(false);
 
-  const GET = async (url) => {
-    return await fetch(url, {
-      method: "GET",
-      headers: { "Authorization": `Bearer ${cookie.glitch}` },
-    }).then((res) => res.json()).then((body) => setData(body));
+  useEffect(GET(`http://localhost:8989/users${(username) ? `/${username}` : ""}`, cookie, setData), [username]);
+  useEffect(GET(`http://localhost:8989/follows/${data.id}`, cookie, setFollowed), [data]);
+
+  useEffect(loadProfilePic(data?.profilepic, setImgSrc), [data]);
+
+  if (data == null) {
+    return (
+      <NotFound />
+    )
   }
-  
-  useEffect(() => {
-    GET(`http://localhost:8989/users${(username) ? `/${username}` : ""}`);
-  }, []);
-
-  useEffect(() => {    
-    if (data.profilepic) {
-      const uint8Array = new Uint8Array(Object.values(data.profilepic));
-
-      const base64String = globalThis.btoa(String.fromCharCode(...uint8Array));
-
-      setImageSrc(`data:image/webp;base64,${base64String}`);
-    }
-  }, [data]);
-
 
   return (
     <Content>
       <Title name={data.username}/>
       <div className="flex flex-row justify-center items-center">
         <div className="flex flex-col justify-center items-center">
-          <ProfilePic src={imageSrc} />
-          <FollowerCount count={(data._count) ? data._count.FollowsTo : "0"} />
-          <CreatedAge createdAt={(data.createdAt) ? new Date(data.createdAt).toLocaleDateString() : "never"} />
+          <ProfilePic size="256" src={imgSrc} />
+          <div className="w-64 h-16 flex flex-row">
+            <FollowButton size="64" to={data.id} followed={followed} setFollowed={setFollowed} />
+            <div className="flex flex-col">
+              <FollowerCount count={(data._count) ? data._count.FollowsTo : "0"} />
+              <CreatedAge createdAt={(data.createdAt) ? new Date(data.createdAt).toLocaleDateString() : "never"} />
+            </div>
+          </div>
         </div>
-        <Bio bio={data.bio} />
+        <Bio bio={(data.bio) ? data.bio : "..."} />
       </div>
     </Content>
   );

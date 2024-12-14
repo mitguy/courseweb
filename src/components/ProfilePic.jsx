@@ -1,6 +1,5 @@
-export default function ProfilePic({ src }) {
+export default function ProfilePic({ size, src }) {
   return (
-    src && src != null && <img width="256" height="256" src={src}></img> ||
-    src && src == null && <img width="256" height="256" src="../assets/pfp.svg"></img>
+    <img width={size} height={size} src={(src != null) ? src : "/pfp.svg"}></img>
   )
 }

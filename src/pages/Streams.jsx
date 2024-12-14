@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { GET, loadProfilePic } from "../components/Util";
 import Content from "../components/Content";
-import Streams from "../components/StreamsList";
+import StreamsList from "../components/StreamsList";
 import SwitchTitle from "../components/SwitchTitle";
 
-export default function Live() {
+export default function Streams() {
   const [cookie] = useCookies(['glitch']);
   const [data, setData] = useState([]);
 
-  useEffect(GET(`http://localhost:8989/follows/live`, cookie, setData), []);
+  useEffect(GET(`http://localhost:8989/streams/live`, cookie, setData), []);
 
   return (
     <Content>
       <SwitchTitle title="Live" />
-      <Streams data={data} />
+      <StreamsList data={data} />
     </Content>
   );
 }

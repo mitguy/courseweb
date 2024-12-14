@@ -5,6 +5,7 @@ import Content from "../components/Content.jsx";
 import Button from "../components/Button.jsx";
 import Register from "../pages/Register.jsx";
 import Login from "../pages/Login.jsx";
+import NotFound from "./NotFound.jsx";
 
 export default function Auth() {
   return (
@@ -25,6 +26,7 @@ export default function Auth() {
           } />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Main>
     </Router>
