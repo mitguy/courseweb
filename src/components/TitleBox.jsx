@@ -19,8 +19,6 @@ export default function TitleBox({ data, state }) {
 
   useEffect(() => {
     (async () => {
-      console.log(title);
-
       const response = await fetch("http://localhost:8989/streams/update", {
         headers: { 
           "Authorization": `Bearer ${cookie.glitch}`,

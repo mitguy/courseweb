@@ -132,8 +132,6 @@ export default function Edit() {
     const fd = new FormData();
     fd.append("profilepic", newImg);
 
-    console.log(fd);
-
     const response = await fetch("http://localhost:8989/users/upload", {
       headers: { 
         "Authorization": `Bearer ${cookie.glitch}`,
