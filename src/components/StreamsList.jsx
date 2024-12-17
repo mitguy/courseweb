@@ -5,7 +5,7 @@ export default function StreamsList({ data }) {
     return (
       <div className="w-fit h-fit flex flex-col gap-2">
         {data.map((item, index) => (
-          <StreamBox key={index} data={item.ToStream} />
+          <StreamBox key={index} data={(item.ToStream) ? item.ToStream : item} />
         ))}
       </div>
     );

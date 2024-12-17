@@ -8,9 +8,9 @@ import StreamTitle from "./StreamTitle";
 import StreamDataBox from "./StreamDataBox";
 
 export default function StreamBox({ data }) {
-  const [cookie] = useCookies(['glitch']);
+  const [cookie] = useCookies(["glitch"]);
   const [user, setUser] = useState([]);
-  const [imgSrc, setImgSrc] = useState(null);
+  const [imgSrc, setImgSrc] = useState("");
 
   useEffect(GET(`http://localhost:8989/users/${data?.username}`, cookie, setUser), [data]);
 

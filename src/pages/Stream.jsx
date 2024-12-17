@@ -10,10 +10,10 @@ import NotFound from "./NotFound";
 export default function Stream() {
   const { username } = useParams();
 
-  const [cookie] = useCookies(['glitch']);
+  const [cookie] = useCookies(["glitch"]);
   const [data, setData] = useState([]);
 
-  useEffect(GET(`http://localhost:8989/streams${(username) ? `/${username}` : ""}`, cookie, setData), [cookie]);
+  useEffect(GET(`http://localhost:8989/streams${(username) ? `/${username}` : ""}`, cookie, setData), []);
 
   if (data == null) {
     return (
@@ -24,10 +24,10 @@ export default function Stream() {
   return (
     <div className="flex flex-1 flex-row">
       <div className="flex flex-col">
-        <Player />
-        <TitleBox data={data} />
+        <Player username={username} />
+        <TitleBox data={data} state={(username) ? false : true} />
       </div>
-      <ChatBox />
+      <ChatBox data={data} />
     </div>
   );
 }

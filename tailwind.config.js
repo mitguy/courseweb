@@ -11,19 +11,30 @@ export default {
       "black": "#000000",
       "white": "#ffffff",
       "yellow": "#ffbf00",
-      "red": "ff0000",
+      "red": "#ff0000",
     },
     extend: {
       textColor: {
         "red": "#ff0000",
       },
       width: {
-        "128": "32rem",
-        "256": "64rem",
         "wp": "1248px",
+        "wc": "672px",
+        "wcb": "670px",
+        "96": "24rem",
+        "128": "32rem",
+        "192": "48rem",
+        "256": "64rem",
+        "384": "96rem",
       },
       height: {
+        "96": "24rem",
+        "128": "32rem",
+        "256": "64rem",
+        "384": "96rem",
         "hp": "702px",
+        "hc": "863px",
+        "hcb": "735px",
       },
       colors: {
         background: "#000000",

@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
 
 export default function FollowButton({ to, followed, setFollowed, size }) {
-  const [cookie] = useCookies(['glitch']);
+  const [cookie] = useCookies(["glitch"]);
 
   const post = async () => {
     if (followed) {

@@ -6,7 +6,7 @@ import UsernameBox from "./UsernameBox";
 import FollowButton from "./FollowButton";
 
 export default function FollowBox({ data }) {
-  const [imgSrc, setImgSrc] = useState(null);
+  const [imgSrc, setImgSrc] = useState("");
   const [followed, setFollowed] = useState(true);
 
   useEffect(loadProfilePic(data?.ToUser.profilepic, setImgSrc), [data]);

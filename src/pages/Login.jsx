@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Content from "../components/Content";
 import TextBox from "../components/TextBox";
 import Input from "../components/Input";
@@ -8,7 +8,7 @@ import ErrorBox from "../components/ErrorBox";
 import Button from "../components/Button";
 
 export default function Login() {
-  const [cookie, setCookie] = useCookies(['glitch']);
+  const [cookie, setCookie] = useCookies(["glitch"]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
