@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { GET, loadProfilePic } from "../components/Util";
+import { GET } from "../components/Util";
 import Content from "../components/Content";
 import StreamsList from "../components/StreamsList";
 import SwitchTitle from "../components/SwitchTitle";

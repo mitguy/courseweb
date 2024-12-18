@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { io } from "socket.io-client";
 import Button from "./Button";
@@ -8,6 +8,14 @@ export default function ChatBox({ data }) {
   const [msg, setMsg] = useState([]);
   const [socket, setSocket] = useState("");
   const [chat, setChat] = useState("");
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [msg]);
 
   useEffect(() => {
     if (data) {
@@ -35,13 +43,11 @@ export default function ChatBox({ data }) {
     if (socket) {
       socket.emit("message", { message: chat });
     }
-
-    setChat("");
   };
 
   return (
     <div className={`w-wc h-hc border-l-1 border-yellow`}>
-      <div className="w-wcb h-hcb overflow-y-scroll">
+      <div ref={containerRef} className="w-wcb h-hcb overflow-y-scroll">
         {msg.map((item, index) => (
           <div key={index} className="h-8 w-full flex flex-row justify-start items-center gap-1">
             <p className="text-xl font-bold">{`${new Date(item.at).toLocaleTimeString()}`}</p>
